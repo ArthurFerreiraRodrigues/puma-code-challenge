@@ -1,0 +1,29 @@
+{
+  "name": "backend-puma-code-challenge",
+  "version": "1.0.0",
+  "description": "Save up to 5 favorite github users. Powered by Github's API.",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "expresss": "^0.0.0",
+    "faker": "^6.6.6",
+    "http-status": "^1.6.2"
+  },
+  "scripts": {
+    "start": "node src/index.js --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^24.0.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-security": "^1.4.0",
+    "jest": "latest",
+    "nodemon": "latest"
+  }
+}
