@@ -2,7 +2,6 @@ const faker = require('faker');
 const Profile = require('../../src/model/Profile.class.model').default;
 
 describe('Profile Model', () => {
-
     describe('Profile Validation', () => {
         let newProfile;
         beforeEach(() => {
@@ -11,12 +10,13 @@ describe('Profile Model', () => {
                 name: faker.name.findName(),
                 avatar: faker.internet.avatar(),
                 url: faker.internet.url(),
-                isStarred: false,
             };
         });
 
         test('Should correctly validate a valid profile', async () => {
-            await expect(new Profile(newProfile).validate()).resolves.toBeUndefined();
+            await expect(
+                new Profile(newProfile).validate(),
+            ).resolves.toBeUndefined();
         });
 
         test('Should throw a validation error if username is invalid', async () => {
@@ -47,14 +47,13 @@ describe('Profile Model', () => {
                 name: faker.name.findName(),
                 avatar: faker.internet.avatar(),
                 url: faker.internet.url(),
-                isStarred: false,
             });
             expect(profile.toJSON()).toMatchObject({
                 username: profile.username,
                 name: profile.name,
                 avatar: profile.avatar,
                 url: profile.url,
-                isStarred: profile.isStarred,
+                isStarred: false,
             });
         });
     });
