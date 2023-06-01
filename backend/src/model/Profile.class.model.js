@@ -1,17 +1,16 @@
+/**
+ * Class to represent a GitHub profile
+ */
 class Profile {
-
     constructor({
-        username,
-        name,
-        avatar,
-        url,
+        username, name, avatar, url,
     }) {
         this.username = username;
         this.name = name;
         this.avatar = avatar;
         this.url = url;
         this.isStarred = false;
-    };
+    }
 
     toJSON() {
         return {
@@ -26,8 +25,16 @@ class Profile {
     static create(profile) {
         return new Profile(profile);
     }
-
-
 }
 
-export default Profile;
+/**
+ * Constant to store all favorited profiles in memory
+ * 
+ * @type {Profile[]}
+ */
+const favoritedProfiles = [];
+
+module.exports = {
+    Profile,
+    favoritedProfiles,
+};
