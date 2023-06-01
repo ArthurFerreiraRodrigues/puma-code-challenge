@@ -1,10 +1,14 @@
-const Profile = require('../model/Profile.class.model').default;
+const { Profile, favoritedProfiles } = require('../model/Profile.class.model');
 
 /**
- * @param {Profile} profileBody 
+ * @param {Profile} profileBody
  */
 const addProfile = async (profileBody) => {
+    const user = await Profile.create(profileBody);
+    favoritedProfiles.push(user);
+    return user;
+};
 
-    const profile = await Profile.create(profileBody);
-    return profile;
-}
+module.exports = {
+    addProfile,
+};

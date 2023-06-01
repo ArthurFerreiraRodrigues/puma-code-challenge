@@ -1,54 +1,19 @@
-const { Profile } = require('../model/Profile.class.model').default;
+const { Profile } = require('../model/Profile.class.model').Profile;
+const { favoritedProfiles } = require('../model/Profile.class.model');
 const profileService = require('../service/profile.service');
-const favoritedProfiles = require('../model/users.model');
 
 const listProfiles = async (req, res, next) => {
     try {
-        const savedUsers = favoritedProfiles;
-        res.status(200).json(profiles);
-    } catch (error) {
-        next(error);
-    }
-};
+        let { username, name, avatar, url } = req.body;
 
-const addProfile = async (req, res, next) => {
-    const { username, name, email, bio } = req.body;
-    try {
-        const profile = await Profile.create({
+        await profileService.addProfile({
             username,
             name,
-            email,
-            bio,
+            avatar,
+            url,
         });
-        res.status(201).json(profile);
-    } catch (error) {
-        next(error);
-    }
-};
 
-const toggleStar = async (req, res, next) => {
-    const { username } = req.params;
-    try {
-        const profile = await Profile.findOne({
-            where: {
-                username,
-            },
-        });
-        profile.isStarred = !profile.isStarred;
-        await profile.save();
-        res.status(200).json(profile);
-    } catch (error) {
-        next(error);
-    }
-};
-
-
-const deleteProfile = async (req, res) => {
-    const { username } = req.params;
-    try {
-        res.status(200).json({
-            message: 'Hello World!' + username,
-        });
+        res.status(200).json(favoritedProfiles);
     } catch (error) {
         next(error);
     }
@@ -56,7 +21,4 @@ const deleteProfile = async (req, res) => {
 
 module.exports = {
     listProfiles,
-    addProfile,
-    toggleStar,
-    deleteProfile,
 };
