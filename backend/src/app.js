@@ -20,5 +20,4 @@ app.use((req, res, next) => {
 app.use(cors());
 app.options('*', cors());
 
-
 module.exports = app;
