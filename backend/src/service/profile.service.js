@@ -47,6 +47,18 @@ const addProfile = async (profileBody) => {
 
 const getStarredProfile = async () => favoritedProfiles.find((profile) => profile.isStarred);
 
+const getProfileByUsername = async (username) => {
+    const user = favoritedProfiles.find((profile) => profile.username === username);
+    if (!user) {
+        throw {
+            status: 404,
+            message: 'User not found',
+        };
+    }
+
+    return user;
+};
+
 /**
  * @param {string} username
  * @param {Profile} currentlyStarredProfile
@@ -77,9 +89,18 @@ const toggleStar = async (username, currentlyStarredProfile) => {
 
     return user;
 };
+
+const deleteProfile = async (username) => {
+    const user = await getProfileByUsername(username);
+    const index = favoritedProfiles.indexOf(user);
+    favoritedProfiles.splice(index, 1);
+};
+
 module.exports = {
     getGithubProfile,
     addProfile,
     getStarredProfile,
+    getProfileByUsername,
     toggleStar,
+    deleteProfile,
 };

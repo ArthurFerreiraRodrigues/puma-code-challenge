@@ -41,8 +41,19 @@ const toggleStar = async (req, res) => {
 /**
  * Removes a profile from the list of favorited profiles
  */
-const deleteProfile = async () => {
-
+const deleteProfile = async (req, res) => {
+    const { username } = req.params;
+    try {
+        await profileService.deleteProfile(username);
+        res.status(200).json(favoritedProfiles);
+    } catch (error) {
+        res.status(error.status).json({
+            error: `${error.status} ${HttpStatus.StatusCodes[error.status]
+                .toLowerCase()
+                .replace('_', ' ')}`,
+            message: error.message,
+        });
+    }
 };
 
 module.exports = {
