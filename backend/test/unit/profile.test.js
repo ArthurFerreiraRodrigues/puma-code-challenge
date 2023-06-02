@@ -1,50 +1,51 @@
-const faker = require('faker');
-const Profile = require('../../src/model/Profile.class.model').default;
+const { faker } = require('@faker-js/faker');
+const { Profile } = require('../../src/model/Profile.class.model');
+const { getGithubProfile } = require('../../src/service/profile.service');
 
 describe('Profile Model', () => {
     describe('Profile Validation', () => {
         let newProfile;
+        let githubRes;
         beforeEach(() => {
             newProfile = {
                 username: faker.internet.userName(),
-                name: faker.name.findName(),
+                name: faker.person.firstName(),
                 avatar: faker.internet.avatar(),
                 url: faker.internet.url(),
+                isStarred: false,
+            };
+            githubRes = {
+                username: newProfile.username,
+                name: newProfile.name,
+                avatar: newProfile.avatar,
+                url: newProfile.url,
             };
         });
 
         test('Should correctly validate a valid profile', async () => {
-            await expect(
-                new Profile(newProfile).validate(),
-            ).resolves.toBeUndefined();
+            const createdProfile = await Profile.create(githubRes);
+            expect(newProfile).toEqual(createdProfile);
         });
 
         test('Should throw a validation error if username is invalid', async () => {
-            newProfile.username = '!!!';
-            await expect(new Profile(newProfile).validate()).rejects.toThrow();
-        });
-
-        test('should throw a validation error if name is invalid', async () => {
-            newProfile.name = 'invalid name';
-            await expect(new Profile(newProfile).validate()).rejects.toThrow();
-        });
-
-        test('should throw a validation error if avatar is invalid', async () => {
-            newProfile.avatar = 'invalid avatar';
-            await expect(new Profile(newProfile).validate()).rejects.toThrow();
-        });
-
-        test('should throw a validation error if url is invalid', async () => {
-            newProfile.url = 'invalid url';
-            await expect(new Profile(newProfile).validate()).rejects.toThrow();
+            const invalidUsername = '!!!';
+            try {
+                await getGithubProfile(invalidUsername);
+                expect(true).toBe(false);
+            } catch (e) {
+                expect(e).toEqual({
+                    status: 404,
+                    message: 'Invalid username',
+                });
+            }
         });
     });
 
     describe('Profile toJSON()', () => {
-        test('Should return all profile info and not starred', () => {
+        test('Should return all profile info and to not be starred', () => {
             const profile = new Profile({
                 username: faker.internet.userName(),
-                name: faker.name.findName(),
+                name: faker.person.firstName(),
                 avatar: faker.internet.avatar(),
                 url: faker.internet.url(),
             });
