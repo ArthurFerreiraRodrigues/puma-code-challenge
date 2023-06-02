@@ -29,7 +29,7 @@ class Profile {
 
 /**
  * Constant to store all favorited profiles in memory
- * 
+ *
  * @type {Profile[]}
  */
 const favoritedProfiles = [];

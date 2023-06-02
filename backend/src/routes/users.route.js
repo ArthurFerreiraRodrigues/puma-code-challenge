@@ -1,12 +1,18 @@
 const express = require('express');
 const profileController = require('../controller/profile.controller');
+const profileMiddleware = require('../middleware/profile.middleware');
 
 const router = express.Router();
 
 router
     .route('/')
     .get(profileController.listProfiles)
-    .post(profileController.addProfile);
+    .post(
+        profileMiddleware.maximumProfiles,
+        profileMiddleware.userAlreadyAdded,
+        profileMiddleware.validUsername,
+        profileController.addProfile,
+    );
 
 router.route('/:username').delete(profileController.deleteProfile);
 
