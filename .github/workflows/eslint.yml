@@ -27,6 +27,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - working-directory: ./backend
-    - run: yarn
-    - run: yarn lint
+    
+    - name: Run Lint
+      working-directory: ./backend
+      run: yarn && yarn lint
