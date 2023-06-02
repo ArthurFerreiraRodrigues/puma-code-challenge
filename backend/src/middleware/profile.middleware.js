@@ -34,7 +34,7 @@ const userAlreadyAdded = async (req, res, next) => {
     if (!username) {
         res.status(400).json({
             error: 'bad request',
-            message: "Key 'username' is required",
+            message: "Request Body key 'username' is required",
         });
         return; // return is necessary to stop the execution of the subsequent middleware
     }
@@ -64,6 +64,7 @@ const validUsername = async (req, res, next) => {
         res.locals.retrievedProfile = await profileService.getGithubProfile(
             username,
         );
+        next();
     } catch (error) {
         // Can be a 404 or 500 error. Had to be handled here because the status code
         // is sent by the github api
@@ -73,14 +74,30 @@ const validUsername = async (req, res, next) => {
                 .replace('_', ' ')}`,
             message: error.message,
         });
-        return; // return is necessary to stop the execution
+    }
+};
+
+/**
+ * Checks if the user has already been starred, if there is none returns undefined
+ */
+const anyoneStarred = async (req, res, next) => {
+    const { username } = req.params;
+
+    if (!username) {
+        return res.status(400).json({
+            error: 'bad request',
+            message: "Request Params key 'username' is required",
+        });// return is necessary to stop the execution of the subsequent middleware
     }
 
-    next();
+    res.locals.currentlyStarredProfile = await profileService.getStarredProfile();
+
+    return next();
 };
 
 module.exports = {
     maximumProfiles,
     userAlreadyAdded,
     validUsername,
+    anyoneStarred,
 };

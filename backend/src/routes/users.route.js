@@ -16,6 +16,6 @@ router
 
 router.route('/:username').delete(profileController.deleteProfile);
 
-router.route('/:username/toggle-star').patch(profileController.toggleStar);
+router.route('/:username/toggle-star').patch(profileMiddleware.anyoneStarred, profileController.toggleStar);
 
 module.exports = router;

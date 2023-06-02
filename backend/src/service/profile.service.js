@@ -45,7 +45,41 @@ const addProfile = async (profileBody) => {
     return user;
 };
 
+const getStarredProfile = async () => favoritedProfiles.find((profile) => profile.isStarred);
+
+/**
+ * @param {string} username
+ * @param {Profile} currentlyStarredProfile
+ * @returns {Profile}
+ */
+const toggleStar = async (username, currentlyStarredProfile) => {
+    const user = favoritedProfiles.find((profile) => profile.username === username);
+    if (!user) {
+        throw {
+            status: 404,
+            message: 'User not found',
+        };
+    }
+
+    if (!currentlyStarredProfile) {
+        user.isStarred = true;
+        return user;
+    }
+
+    if (user === currentlyStarredProfile) {
+        user.isStarred = !user.isStarred;
+        return user;
+    }
+
+    // eslint-disable-next-line no-param-reassign
+    currentlyStarredProfile.isStarred = false;
+    user.isStarred = true;
+
+    return user;
+};
 module.exports = {
     getGithubProfile,
     addProfile,
+    getStarredProfile,
+    toggleStar,
 };
