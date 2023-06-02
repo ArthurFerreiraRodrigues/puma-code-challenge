@@ -13,5 +13,6 @@ module.exports = {
     rules: {
         'no-console': 'off',
         indent: ['error', 4],
+        'no-throw-literal': 'off',
     },
 };
