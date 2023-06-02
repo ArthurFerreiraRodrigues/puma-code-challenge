@@ -1,0 +1,60 @@
+:host ::ng-deep {
+  .p-card .p-card-title {
+    height: 70px;
+  }
+
+  .p-card {
+    width: 300px;
+    min-height: 516px;
+  }
+  .p-card-content {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    img {
+      float: left;
+      width: 270px;
+      height: 270px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  .buttons {
+    border-top: 2px solid #ebebeb;
+    width: 100%;
+    padding-top: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    flex-direction: row;
+    .openOnGithub {
+      img {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    .starUser {
+      i {
+        font-size: 2rem;
+      }
+      .starred {
+        color: #ffd700;
+      }
+    }
+
+    .removeFavorite {
+      i {
+        font-size: 2rem;
+      }
+    }
+  }
+}

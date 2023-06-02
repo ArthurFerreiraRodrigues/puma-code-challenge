@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Profile } from 'src/app/models/profile.model';
 
 @Component({
   selector: 'puma-challenge-profile-card',
@@ -6,7 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile-card.component.scss'],
 })
 export class ProfileCardComponent {
+  @Input()
+  profile!: Profile;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  removeFavorite(profile) {
+    console.log(profile);
+  }
 }

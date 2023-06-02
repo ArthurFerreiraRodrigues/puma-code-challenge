@@ -1,1 +1,21 @@
-<p>profile-card works!</p>
+<p-card [header]="profile.name?profile.name:profile.username"
+  [subheader]="profile.name?profile.username: ''" styleClass="ui-card-shadow">
+  <img [src]="profile.avatar" alt="Profile" style="width:100%">
+
+  <div class="buttons">
+    <div class="openOnGithub">
+      <a [href]="profile.url"><img src="../../../assets/github-mark.svg"
+          alt="Github"></a>
+    </div>
+
+    <div class="starUser">
+      <i class="pi pi-star" [ngClass]="{'starred': profile.isStarred,}"
+        (click)="removeFavorite(profile)"></i>
+    </div>
+
+    <div class="removeFavorite">
+      <i class="pi pi-trash" (click)="removeFavorite(profile)"></i>
+    </div>
+
+  </div>
+</p-card>
