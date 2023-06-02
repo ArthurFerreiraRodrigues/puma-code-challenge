@@ -30,4 +30,4 @@ jobs:
     
     - name: Run Lint
       working-directory: ./backend
-      run: yarn && yarn lint
+    - run: yarn && yarn lint
