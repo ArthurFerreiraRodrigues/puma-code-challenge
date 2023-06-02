@@ -1,7 +1,7 @@
 export interface Profile {
-  username: String;
-  name: String | null; // Acording to GitHub API, this field can be null
-  avatar: String;
-  url: String;
+  username: string;
+  name: string | null; // Acording to GitHub API, this field can be null
+  avatar: string;
+  url: string;
   isStarred: Boolean;
 }
