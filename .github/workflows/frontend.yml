@@ -1,0 +1,35 @@
+name: Front-End Build Check
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: ["frontend/**"]
+
+    
+  pull_request:
+    branches: [ "main" ]
+  
+  workflow_dispatch:
+  
+jobs:
+  build_project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.6.0
+        with:
+            node-version: 16.18.0
+
+      - uses: actions/checkout@v3
+      
+      - name: Install latest npm version
+        run: npm install -g npm
+        working-directory: ./frontend
+        
+      - name: Install Angular
+        run: npm install -g @angular/cli
+        working-directory: ./frontend
+        
+      - name: Build Project
+        run: npm i && ng build
+        working-directory: ./frontend
