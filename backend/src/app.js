@@ -5,6 +5,9 @@ const routes = require('./routes');
 
 const app = express();
 
+app.use(cors());
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -17,7 +20,5 @@ app.use((req, res, next) => {
     next(error);
 });
 
-app.use(cors());
-app.options('*', cors());
 
 module.exports = app;
