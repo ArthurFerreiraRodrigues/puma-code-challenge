@@ -20,5 +20,4 @@ app.use((req, res, next) => {
     next(error);
 });
 
-
 module.exports = app;
