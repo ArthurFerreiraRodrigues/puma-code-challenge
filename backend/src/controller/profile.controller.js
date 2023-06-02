@@ -13,6 +13,18 @@ const addProfile = async (req, res, next) => {
     }
 };
 
+/**
+ * Lists all favorited profiles
+ */
+const listProfiles = async (req, res, next) => {
+    try {
+        res.status(200).json(favoritedProfiles);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     addProfile,
+    listProfiles,
 };
