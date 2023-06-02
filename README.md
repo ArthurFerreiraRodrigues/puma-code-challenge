@@ -9,6 +9,8 @@ Feito utilizando o Express.Js, um famework para Node.Js, meu back-end utiliza a 
 
 Foram realizados testes unitários utilizando o Jest, que podem ser encontrados em `backend/tests/profile.test.js`. Não foi possível realizar os testes de integração para as rotas, pois não houve tempo. Além desses testes, implementei 2 testes de integridade de código, disponíveis no github actions, que podem ser encontrados em `.github/workflows/`.
 
+A port, a quantidade maxima de usuários favoritados e a url da api do github são definidas no arquivo `/backend/src/config/envronment.js` e podem ser alteradas a qualquer momento.
+
 ### Front-end
 Feito utilizando Angular, meu front-end consiste em 4 seções:
 - Página principal: a página onde aparecem todas as opções
