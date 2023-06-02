@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile.service';
 
@@ -11,19 +11,38 @@ export class ProfileCardComponent {
   @Input()
   profile!: Profile;
 
+  @Output()
+  onUpdateEvent: EventEmitter<Profile> = new EventEmitter();
+
   constructor(private readonly profileService: ProfileService) {}
 
   ngOnInit(): void {}
 
-  removeFavorite(profile) {
-    this.profileService.deleteProfile(profile.username).subscribe((data) => {
-      console.log(data);
+  toggleStar(profile) {
+    this.profileService.toggleStar(profile.username).subscribe((data) => {
+      this.onUpdateEvent.emit();
     });
   }
 
-  toggleStar(profile) {
-    this.profileService.toggleStar(profile.username).subscribe((data) => {
-      console.log(data);
+  removeFavorite(profile) {
+    this.profileService.deleteProfile(profile.username).subscribe((data) => {
+      this.onUpdateEvent.emit();
     });
+  }
+
+  getProfileAvatar(): string {
+    return this.profile.avatar;
+  }
+
+  getProfileName(): string {
+    return this.profile.name;
+  }
+
+  getProfileUsername(): string {
+    return this.profile.username;
+  }
+
+  getIsStarred(): boolean {
+    return this.profile.isStarred;
   }
 }

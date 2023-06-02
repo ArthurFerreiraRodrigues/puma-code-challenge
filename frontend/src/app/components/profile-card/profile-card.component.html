@@ -1,6 +1,7 @@
-<p-card [header]="profile.name?profile.name:profile.username"
-  [subheader]="profile.name?profile.username: ''" styleClass="ui-card-shadow">
-  <img [src]="profile.avatar" alt="Profile" style="width:100%">
+<p-card [header]=" getProfileName() ?getProfileName():getProfileUsername()"
+  [subheader]="getProfileName()?getProfileUsername(): ' '"
+  styleClass="ui-card-shadow">
+  <img [src]="getProfileAvatar()" alt="Profile" style="width:100%">
 
   <div class="buttons">
     <div class="openOnGithub">

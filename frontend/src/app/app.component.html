@@ -1,6 +1,32 @@
 <body>
+  <div class="header">
+    <h1>PUMA Challenge</h1>
+  </div>
+
+  <div class="top">
+    <div class="search">
+      <input #input pInputText type="text" placeholder="Search"
+        [(ngModel)]="searchUsername" />
+      <div class="addUser">
+        <p-button type="button" label="Add User" (click)="addProfile()"></p-button>
+      </div>
+    </div>
+
+    <div class="errorMessage" *ngIf="erro">
+      <p-messages severity="error">
+        <ng-template pTemplate>
+          <div class="ml-2">Erro: {{mensagemErro}}</div>
+        </ng-template>
+      </p-messages>
+    </div>
+
+    <div class="sortByAlpha">
+      <button pButton type="button" label="Ordem Aalfabética"
+        (click)="sortByAlpha()"></button>
+    </div>
+  </div>
   <div class="favoritedUsers">
-    <puma-challenge-profile-card *ngFor="let profile of profiles"
-      [profile]="profile"></puma-challenge-profile-card>
+    <puma-challenge-profile-card *ngFor="let profile of getProfiles()"
+      [profile]="profile" (onUpdateEvent)="updateList()"></puma-challenge-profile-card>
   </div>
 </body>
