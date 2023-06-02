@@ -21,7 +21,10 @@ const getGithubProfile = async (username) => {
     }
 
     if (githubRes.status !== 200) {
-        throw new Error('Github API request failed');
+        throw {
+            status: githubRes.status,
+            message: 'Github API request failed',
+        };
     }
 
     const githubProfile = await githubRes.json();
