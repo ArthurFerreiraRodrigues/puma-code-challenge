@@ -10,7 +10,7 @@
 
     <div class="starUser">
       <i class="pi pi-star" [ngClass]="{'starred': profile.isStarred,}"
-        (click)="removeFavorite(profile)"></i>
+        (click)="toggleStar(profile)"></i>
     </div>
 
     <div class="removeFavorite">

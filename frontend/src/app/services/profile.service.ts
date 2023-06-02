@@ -10,7 +10,19 @@ import { HttpService } from './http.service';
 export class ProfileService extends HttpService {
   private endpoint = 'users';
 
-  getProfiles(): Observable<Profile[]> {
+  addProfile(username: string): Observable<Profile> {
+    return this.post(this.endpoint, { username });
+  }
+
+  listProfiles(): Observable<Profile[]> {
     return this.get(this.endpoint);
+  }
+
+  toggleStar(username): Observable<Profile> {
+    return this.patch(`${this.endpoint}/${username}/toggle-star`);
+  }
+
+  deleteProfile(username): Observable<Profile> {
+    return this.delete(`${this.endpoint}/${username}`);
   }
 }
